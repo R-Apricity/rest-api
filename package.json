@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@bochilteam/scraper-sosmed": "^1.0.5",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "axios": "^1.6.2",
     "bard-ai": "^2.0.3",
     "bimg": "^0.1.5",
     "bing-chat": "github:rnz269/bing-chat",
@@ -9,9 +11,12 @@
     "caliph-api": "^1.0.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "fluent-ffmpeg": "^2.1.2",
     "fs": "^0.0.1-security",
+    "i": "^0.3.7",
     "makemeazombie": "^1.0.2",
     "node_characterai": "^1.2.1",
+    "npm": "^10.2.4",
     "playwright-chromium": "^1.39.0",
     "scrape-websitee": "^1.0.54",
     "spotifydl-core": "^0.2.0",
