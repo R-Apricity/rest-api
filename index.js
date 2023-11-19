@@ -1,17 +1,24 @@
 import express from "express";
 import bodyParser from "body-parser";
-import dotenv from "dotenv";
+import dotenv from "dotenv"; dotenv.config();
 import Bard from "bard-ai";
 import { BingChat } from "bing-chat-rnz";
 import { generateImagesLinks } from "bimg";
 import CharacterAI from "node_characterai";
 const characterAI = new CharacterAI();
+import { Spotify } from 'spotifydl-core'
+
+const spotify = new Spotify({
+  clientId: process.env.SPOTIFY_ID,
+  clientSecret: process.env.SPOTIFY_SECRET
+})
 await characterAI.authenticateWithToken(process.env.CHARACTER_AI)
-dotenv.config();
 const app = express();
+
 app.listen(3000, () => {
   console.log(`Example app listening on port 3000`);
 });
+
 const bard = new Bard({
   "__Secure-1PSID": process.env.PSID_TOKEN,
   "__Secure-1PSIDTS": process.env.PSIDTS_TOKEN,
@@ -19,8 +26,8 @@ const bard = new Bard({
 const sydneyAPI = new BingChat({
   cookie: process.env.BING_IMAGE_COOKIE,
 });
-app.use(bodyParser.json());
 
+app.use(bodyParser.json());
 app.use("/api", (req, res, next) => {
   if (req.method !== "POST")
     return res.status(400).send("Forbidden, Use POST not GET");
