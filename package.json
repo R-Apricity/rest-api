@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "@bochilteam/scraper-sosmed": "^1.0.5",
+    "bard-ai": "^2.0.3",
+    "bimg": "^0.1.5",
+    "bing-chat": "github:rnz269/bing-chat",
+    "bing-chat-rnz": "github:rnz269/bing-chat#fix-conversation-signature",
+    "body-parser": "^1.20.2",
+    "caliph-api": "^1.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "makemeazombie": "^1.0.2",
+    "node_characterai": "^1.2.1",
+    "playwright-chromium": "^1.39.0",
+    "scrape-websitee": "^1.0.54",
+    "spotifydl-core": "^0.2.0",
+    "sydney-ai": "^1.0.1",
+    "webp-converter": "^2.3.3"
+  },
+  "name": "rest-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
