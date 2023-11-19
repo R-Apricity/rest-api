@@ -24,9 +24,11 @@ const bard = new Bard({
   "__Secure-1PSID": process.env.PSID_TOKEN,
   "__Secure-1PSIDTS": process.env.PSIDTS_TOKEN,
 });
+
 const sydneyAPI = new BingChat({
   cookie: process.env.BING_IMAGE_COOKIE,
 });
+
 const app = express();
 app.use(bodyParser.json());
 app.listen(process.env.PORT || 3000, () => {
@@ -53,7 +55,7 @@ app.post("/api/bard", async (req, res) => {
     const resp = await convo.ask(req.body.query);
     res.json({ creds: { ...convo.export() }, response: resp });
   } catch (e) {
-    res.status(500).json({ error: r.stack.toString() });
+    res.status(500).json({ error: e.stack.toString() });
   }
 });
 
@@ -61,7 +63,7 @@ app.post("/api/bimg", async (req, res) => {
   try {
     res.json({ response: await generateImagesLinks(req.body.query) });
   } catch (e) {
-    res.status(500).json({ error: r.stack.toString() });
+    res.status(500).json({ error: e.stack.toString() });
   }
 });
 app.post("/api/sydney", async (req, res) => {
@@ -69,7 +71,7 @@ app.post("/api/sydney", async (req, res) => {
     const resp = await sydneyAPI.sendMessage(req.body.query);
     res.json({ response: resp.text });
   } catch (e) {
-    res.status(500).json({ error: r.stack.toString() });
+    res.status(500).json({ error: e.stack.toString() });
   }
 });
 
@@ -81,7 +83,7 @@ app.post("/api/cai/:characterid", async (req, res) => {
     const res2 = await chat.sendAndAwaitResponse(req.body.query, true);
     res.json({ data: { ...res2 }, response: res2.text || res });
   } catch (e) {
-    res.status(500).json({ error: r.stack.toString() });
+    res.status(500).json({ error: e.stack.toString() });
   }
 });
 
@@ -109,7 +111,7 @@ app.post("/api/spotify", async (req, res) => {
       response: await spotify.downloadTrack(url),
     });
   } catch (e) {
-    res.status(500).json({ error: r.stack.toString() });
+    res.status(500).json({ error: e.stack.toString() });
   }
 });
 app.post("/api/captcha", async (req, res) => {
@@ -117,6 +119,6 @@ app.post("/api/captcha", async (req, res) => {
     const { image, text } = createCaptchaSync(300, 100);
     res.json({ response: text, image: image });
   } catch (e) {
-    res.status(500).json({ error: r.stack.toString() });
+    res.status(500).json({ error: e.stack.toString() });
   }
 });
