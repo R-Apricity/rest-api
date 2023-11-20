@@ -69,7 +69,7 @@ app.post("/api/bimg", async (req, res) => {
 app.post("/api/sydney", async (req, res) => {
   try {
     const resp = await sydneyAPI.sendMessage(req.body.query);
-    res.json({ response: resp.text });
+    res.json({ response: resp.text, data: { ...resp } });
   } catch (e) {
     res.status(500).json({ error: e.stack.toString() });
   }
@@ -86,7 +86,64 @@ app.post("/api/cai/:characterid", async (req, res) => {
     res.status(500).json({ error: e.stack.toString() });
   }
 });
-
+app.post("/api/zerogpt", async (req, res) => {
+  try {
+    await axios
+      .post(
+        "https://api.zerogpt.com/api/detect/detectText",
+        {
+          input_text: req.body.query,
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            origin: "https://www.zerogpt.com",
+            "sec-fetch-site": "same-site",
+            "user-agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+          },
+        }
+      )
+      .then((r) => res.json({ response: { ...r.data } }));
+  } catch (e) {
+    res.status(500).json({ error: e.stack.toString() });
+  }
+});
+app.post("/api/blackbox", async (req, res) => {
+  try {
+    await axios
+      .post(
+        "https://www.useblackbox.io/chat-request-v4",
+        {
+          textInput: req.body.query,
+          allMessages: [
+            {
+              user: req.body.query,
+            },
+          ],
+          stream: "",
+          clickedContinue: false,
+        },
+        {
+          headers: {
+            authority: "www.useblackbox.io",
+            "content-type": "application/json",
+            "x-requested-with": "XMLHttpRequest",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.status !== "success") throw new Error(response.data);
+        res.json({ response: response.data.response[0][0] });
+      })
+      .catch((e) => {
+        throw e;
+      });
+  } catch (e) {
+    res.status(500).json({ error: e.stack.toString() });
+  }
+});
+//Downloader
 app.post("/api/spotify", async (req, res) => {
   try {
     let url = req.body.query;
@@ -114,6 +171,7 @@ app.post("/api/spotify", async (req, res) => {
     res.status(500).json({ error: e.stack.toString() });
   }
 });
+//Generate
 app.post("/api/captcha", async (req, res) => {
   try {
     const { image, text } = createCaptchaSync(300, 100);
