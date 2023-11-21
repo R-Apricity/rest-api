@@ -19,6 +19,7 @@ import { chromium } from "playwright-chromium";
 import func from "./function.js";
 const browser = await chromium.launch({
   headless: process.platform == "linux" ? true : false,
+  executablePath: process.platform == "linux" ? "/home/container/chromium/chrome": ""
 });
 const context = await browser.newContext();
 
