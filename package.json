@@ -6,7 +6,6 @@
     "axios": "^1.6.2",
     "bard-ai": "^2.0.3",
     "bimg": "^0.1.5",
-    "bing-chat": "github:rnz269/bing-chat",
     "bing-chat-rnz": "github:rnz269/bing-chat#fix-conversation-signature",
     "body-parser": "^1.20.2",
     "caliph-api": "^1.0.0",

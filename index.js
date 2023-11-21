@@ -13,7 +13,7 @@ import { BingChat } from "bing-chat-rnz";
 import { generateImagesLinks } from "bimg";
 import { Spotify } from "spotifydl-core";
 import { createCaptchaSync } from "captcha-canvas";
-const characterAI = await new (await import("node_characterai")).default();
+const characterAI = new (await import("node_characterai")).default();
 await characterAI.authenticateWithToken(process.env.CHARACTER_AI);
 import { chromium } from "playwright-chromium";
 import func from "./function.js";
