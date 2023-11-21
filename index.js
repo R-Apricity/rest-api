@@ -1,4 +1,4 @@
-import 'express-async-errors'
+import "express-async-errors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import express from "express";
@@ -16,7 +16,7 @@ import { createCaptchaSync } from "captcha-canvas";
 const characterAI = await new (await import("node_characterai")).default();
 await characterAI.authenticateWithToken(process.env.CHARACTER_AI);
 import { chromium } from "playwright-chromium";
-import func from './function.js'
+import func from "./function.js";
 const browser = await chromium.launch({
   headless: process.platform == "linux" ? true : false,
 });
@@ -44,13 +44,12 @@ app.use(bodyParser.json());
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Example app listening on port ${process.env.PORT || 3000}`);
 });
-const errorHandling = (err, req, res, next) => {
+app.use((err, req, res, next) => {
   res.status(500).json({
     error: err.message,
     success: false,
   });
-};
-app.use(errorHandling);
+});
 app.use("/api", (req, res, next) => {
   if (req.method !== "POST")
     return res.status(400).send("Forbidden, Use POST not GET");
@@ -59,7 +58,7 @@ app.use("/api", (req, res, next) => {
     return res.status(403).send("Forbidden, Invalid Key");
   if (!req.body.query)
     return res.status(400).send("Missing query parameters On Body");
-   next();
+  next();
 });
 app.get("/", (req, res) => {
   res.send(
@@ -67,78 +66,78 @@ app.get("/", (req, res) => {
   );
 });
 app.post("/api/bard", async (req, res) => {
-    let convo = bard.createChat(req.body.creds ? req.body.creds : "");
-    const resp = await convo.ask(req.body.query);
-    res.json({ creds: { ...convo.export() }, response: resp });
+  let convo = bard.createChat(req.body.creds ? req.body.creds : "");
+  const resp = await convo.ask(req.body.query);
+  res.json({ creds: { ...convo.export() }, response: resp });
 });
 
 app.post("/api/bimg", async (req, res) => {
-    res.json({ response: await generateImagesLinks(req.body.query) });
+  res.json({ response: await generateImagesLinks(req.body.query) });
 });
 app.post("/api/sydney", async (req, res) => {
-    const resp = await sydneyAPI.sendMessage(req.body.query);
-    res.json({ response: resp.text, data: { ...resp } });
+  const resp = await sydneyAPI.sendMessage(req.body.query);
+  res.json({ response: resp.text, data: { ...resp } });
 });
 
 app.post("/api/cai/:characterid", async (req, res) => {
-    const { characterid } = req.params;
-    console.log(characterid);
-    const chat = await characterAI.createOrContinueChat(characterid);
-    const res2 = await chat.sendAndAwaitResponse(req.body.query, true);
-    res.json({ data: { ...res2 }, response: res2.text || res });
+  const { characterid } = req.params;
+  console.log(characterid);
+  const chat = await characterAI.createOrContinueChat(characterid);
+  const res2 = await chat.sendAndAwaitResponse(req.body.query, true);
+  res.json({ data: { ...res2 }, response: res2.text || res });
 });
 app.post("/api/zerogpt", async (req, res) => {
-    await axios
-      .post(
-        "https://api.zerogpt.com/api/detect/detectText",
-        {
-          input_text: req.body.query,
+  await axios
+    .post(
+      "https://api.zerogpt.com/api/detect/detectText",
+      {
+        input_text: req.body.query,
+      },
+      {
+        headers: {
+          "content-type": "application/json",
+          origin: "https://www.zerogpt.com",
+          "sec-fetch-site": "same-site",
+          "user-agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
         },
-        {
-          headers: {
-            "content-type": "application/json",
-            origin: "https://www.zerogpt.com",
-            "sec-fetch-site": "same-site",
-            "user-agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
-          },
-        }
-      )
-      .then((r) => res.json({ response: { ...r.data } }));
+      }
+    )
+    .then((r) => res.json({ response: { ...r.data } }));
 });
 app.post("/api/blackbox", async (req, res) => {
-    await axios
-      .post(
-        "https://www.useblackbox.io/chat-request-v4",
-        {
-          textInput: req.body.query,
-          allMessages: [
-            {
-              user: req.body.query,
-            },
-          ],
-          stream: "",
-          clickedContinue: false,
-        },
-        {
-          headers: {
-            authority: "www.useblackbox.io",
-            "content-type": "application/json",
-            "x-requested-with": "XMLHttpRequest",
+  await axios
+    .post(
+      "https://www.useblackbox.io/chat-request-v4",
+      {
+        textInput: req.body.query,
+        allMessages: [
+          {
+            user: req.body.query,
           },
-        }
-      )
-      .then((response) => {
-        if (response.data.status !== "success") throw new Error(response.data);
-        res.json({ response: response.data.response[0][0] });
-      })
-      .catch((e) => {
-        throw e;
-      });
+        ],
+        stream: "",
+        clickedContinue: false,
+      },
+      {
+        headers: {
+          authority: "www.useblackbox.io",
+          "content-type": "application/json",
+          "x-requested-with": "XMLHttpRequest",
+        },
+      }
+    )
+    .then((response) => {
+      if (response.data.status !== "success") throw new Error(response.data);
+      res.json({ response: response.data.response[0][0] });
+    })
+    .catch((e) => {
+      throw e;
+    });
 });
 app.post("/api/a", async (req, res) => {
-  throw new Error("a")
-})
+  throw new Error("a");
+});
 app.post("/api/aivoicelist", async (req, res) => {
   //Use this script to get the latest character list on https://plachta-vits-umamusume-voice-synthesizer.hf.space/
   // const obj = {};
@@ -162,38 +161,40 @@ app.post("/api/aivoicelist", async (req, res) => {
   // console.log(JSON.stringify(obj, null, 2));
   res.json({ ...aivoice });
 });
-app.post("/api/animevoicegen", async(req,res) => {
-  const body = req.body.query
-  if(!body.speed || !body.language || !body.character || !body.text) return res.status(400).send(`Invalid params`)
-  if(!Object.keys(aivoice).includes(body.character.toLowerCase())) return res.status(400).send(`Invalid character name`)
-  res.json({response: await func.aianimevoice(context, body)})
-})
+app.post("/api/animevoicegen", async (req, res) => {
+  const body = req.body.query;
+  if (!body.speed || !body.language || !body.character || !body.text)
+    return res.status(400).send(`Invalid params`);
+  if (!Object.keys(aivoice).includes(body.character.toLowerCase()))
+    return res.status(400).send(`Invalid character name`);
+  res.json({ response: await func.aianimevoice(context, body) });
+});
 //Downloader
 app.post("/api/spotify", async (req, res) => {
-    let url = req.body.query;
-    if (
-      !url.match(
-        /^(?:https?:\/\/(?:open|play)\.spotify\.com\/)(?:embed)?\/?(track)(?::|\/)((?:[0-9a-zA-Z]){22})/i
-      )
+  let url = req.body.query;
+  if (
+    !url.match(
+      /^(?:https?:\/\/(?:open|play)\.spotify\.com\/)(?:embed)?\/?(track)(?::|\/)((?:[0-9a-zA-Z]){22})/i
     )
-      url = await axios
-        .get(
-          await axios
-            .get(url, {
-              maxRedirects: 0,
-              validateStatus: null,
-            })
-            .then((r) => r.headers.location)
-        )
-        .then((r) => r.data.split("\n")[249].split('"')[1]);
+  )
+    url = await axios
+      .get(
+        await axios
+          .get(url, {
+            maxRedirects: 0,
+            validateStatus: null,
+          })
+          .then((r) => r.headers.location)
+      )
+      .then((r) => r.data.split("\n")[249].split('"')[1]);
 
-    res.json({
-      details: { ...(await spotify.getTrack(url)) },
-      response: await spotify.downloadTrack(url),
-    });
+  res.json({
+    details: { ...(await spotify.getTrack(url)) },
+    response: await spotify.downloadTrack(url),
+  });
 });
 //Generate things
 app.post("/api/captcha", async (req, res) => {
-    const { image, text } = createCaptchaSync(300, 100);
-    res.json({ response: text, image: image });
+  const { image, text } = createCaptchaSync(300, 100);
+  res.json({ response: text, image: image });
 });
