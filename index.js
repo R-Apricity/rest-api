@@ -42,8 +42,8 @@ const sydneyAPI = new BingChat({
 
 const app = express();
 app.use(bodyParser.json());
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Example app listening on port ${process.env.PORT || 3000}`);
+app.listen(process.env.SERVER_PORT || process.env.PORT || 3000, () => {
+  console.log(`Example app listening on port ${process.env.SERVER_PORT ||process.env.PORT || 3000}`);
 });
 app.use((err, req, res, next) => {
   res.status(500).json({
