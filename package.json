@@ -24,7 +24,8 @@
     "spotifydl-core": "^0.2.0",
     "sydney-ai": "^1.0.1",
     "webp-converter": "^2.3.3",
-    "weird-to-normal-chars": "^1.8.3"
+    "weird-to-normal-chars": "^1.8.3",
+    "yt-search": "^2.10.4"
   },
   "name": "rest-api",
   "version": "1.0.0",
