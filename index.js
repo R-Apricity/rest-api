@@ -11,6 +11,14 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 const app = express();
 app.use(bodyParser.json());
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).send({ message: 'Invalid JSON format' })
+  }
+  next();
+});
+
+
 app.use("/api", apiroutes);
 app.listen(process.env.SERVER_PORT || process.env.PORT || 3000, () => {
   console.log(`Example app listening on port ${process.env.SERVER_PORT ||process.env.PORT || 3000}`);
