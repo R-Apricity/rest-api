@@ -13,7 +13,7 @@ const app = express();
 const srv = app.listen(process.env.SERVER_PORT || process.env.PORT || 3000, () => {
   console.log(`Example app listening on port ${process.env.SERVER_PORT ||process.env.PORT || 3000}`);
 });
-srv.setTimeout(180000)
+srv.setTimeout(300000)
 app.use(bodyParser.json());
 
 app.use((err, req, res, next) => {
