@@ -10,7 +10,12 @@ dotenv.config();
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 const app = express();
+const srv = app.listen(process.env.SERVER_PORT || process.env.PORT || 3000, () => {
+  console.log(`Example app listening on port ${process.env.SERVER_PORT ||process.env.PORT || 3000}`);
+});
+srv.setTimeout(180000)
 app.use(bodyParser.json());
+
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
     return res.status(400).send({ message: 'Invalid JSON format' })
@@ -20,9 +25,6 @@ app.use((err, req, res, next) => {
 
 
 app.use("/api", apiroutes);
-app.listen(process.env.SERVER_PORT || process.env.PORT || 3000, () => {
-  console.log(`Example app listening on port ${process.env.SERVER_PORT ||process.env.PORT || 3000}`);
-});
 app.all("/", (req, res) => {
   res.send(
     `hello there, This is the available Routes, docs is coming soon (Dev Does Not Have Time To Make Docs)<br/>${listEndpoints(apiroutes, { prefix: '/api/', logger: async function(){} }).map(r=>r.path).join("<br/>")}`
