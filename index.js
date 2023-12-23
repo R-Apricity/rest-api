@@ -32,8 +32,13 @@ app.listen(process.env.SERVER_PORT || process.env.PORT || 3000, () => {
 app.use(bodyParser.json());
 app.use("/api", apiroutes);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJsdoc(options)));
-
-app.use((err, req, res, next) => {
+apiroutes.use(async (err, req, res, next) => {
+  return res.status(500).json({ error: err.stack.toString() });
+});
+apiroutes.use((err, req, res, next) => {
+  return res.status(500).json({ error: err.stack.toString() });
+});
+apiroutes.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
     return res.status(400).send({ error: 'Invalid JSON format' })
   }
