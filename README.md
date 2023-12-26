@@ -2,6 +2,8 @@
 
 .env file value
 ```
+#GOOGLE_AI
+GOOGLE_AI_STUDIO_KEY=
 #BARD
 PSID_TOKEN=
 PSIDTS_TOKEN=
@@ -35,4 +37,10 @@ PORT=
 Example: <br>
 PSID_TOKEN= __Secure-1PSID COOKIE <br>
 PSIDTS_TOKEN= __Secure-1PSIDTS COOKIE <br>
+ </details>
+ <details>
+ <summary>Gemini</summary>
+ 1. Head to https://makersuite.google.com/app/apikey
+ 2. Login using your google account
+ 3. Done!
  </details>
