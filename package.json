@@ -6,7 +6,6 @@
     "@tobyg74/tiktok-api-dl": "^1.0.13",
     "axios": "^1.6.2",
     "bard-ai": "^2.0.3",
-    "bimg": "^0.1.5",
     "bimg-new": "^0.3.0",
     "bing-chat-rnz": "^0.2.6",
     "body-parser": "^1.20.2",
