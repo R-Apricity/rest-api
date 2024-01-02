@@ -1,0 +1,68 @@
+{
+  "userInfo": {
+    "user": {
+      "id": "6614519312189947909",
+      "shortId": "",
+      "uniqueId": "mrbeast",
+      "nickname": "MrBeast",
+      "avatarLarger": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7310051540889239595~c5_1080x1080.jpeg?lk3s=a5d48078&x-expires=1704340800&x-signature=X8RsTTRdQ7HhTjErE2hPuJi4E1c%3D",
+      "avatarMedium": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7310051540889239595~c5_720x720.jpeg?lk3s=a5d48078&x-expires=1704340800&x-signature=EK1hKByYyxFOPr4vSIBaBkW2f88%3D",
+      "avatarThumb": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7310051540889239595~c5_100x100.jpeg?lk3s=a5d48078&x-expires=1704340800&x-signature=RUJtklb7HfYtkRQTrc14ZCbvbWw%3D",
+      "signature": "I want to make the world a better place before I die",
+      "createTime": 0,
+      "verified": true,
+      "secUid": "MS4wLjABAAAABKjQkOz_IIzXXzEAl_9LGsWhvK-gBnlczwRPXK8EmxAp6K3X0qiaP5_OEqmm0XwG",
+      "ftc": false,
+      "relation": 0,
+      "openFavorite": false,
+      "bioLink": {
+        "link": "https://bit.ly/MrBeastxSamsung",
+        "risk": 3
+      },
+      "commentSetting": 0,
+      "commerceUserInfo": {
+        "commerceUser": false
+      },
+      "duetSetting": 0,
+      "stitchSetting": 0,
+      "privateAccount": false,
+      "secret": false,
+      "isADVirtual": false,
+      "roomId": "",
+      "uniqueIdModifyTime": 0,
+      "ttSeller": false,
+      "region": "US",
+      "profileTab": {
+        "showMusicTab": false,
+        "showQuestionTab": false,
+        "showPlayListTab": true
+      },
+      "followingVisibility": 1,
+      "recommendReason": "",
+      "nowInvitationCardUrl": "",
+      "nickNameModifyTime": 0,
+      "isEmbedBanned": false,
+      "canExpPlaylist": true,
+      "profileEmbedPermission": 1,
+      "language": "en",
+      "eventList": []
+    },
+    "stats": {
+      "followerCount": 92300000,
+      "followingCount": 327,
+      "heart": 899200000,
+      "heartCount": 899200000,
+      "videoCount": 328,
+      "diggCount": 0,
+      "friendCount": 262
+    },
+    "itemList": []
+  },
+  "shareMeta": {
+    "title": "MrBeast on TikTok",
+    "desc": "@mrbeast 92.3m Followers, 327 Following, 899.2m Likes - Watch awesome short videos created by MrBeast"
+  },
+  "statusCode": 0,
+  "statusMsg": "ok",
+  "needFix": true
+}
