@@ -1,9 +1,8 @@
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-const ffmpegPath = (await import("@ffmpeg-installer/ffmpeg")).path;
-import ffmpeg from "fluent-ffmpeg";
+
+
 import express from "express";
-import listEndpoints from "express-list-routes";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
 //Routes
@@ -11,7 +10,6 @@ import { default as apiroutes } from "./lib/routes.js";
 
 ///Init
 dotenv.config();
-ffmpeg.setFfmpegPath(ffmpegPath);
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -52,11 +50,6 @@ app.use((err, req, res, next) => {
 
 app.all("/", (req, res) => {
   res.send(
-    `hello there, This is the available Routes, docs <a href="/docs">is located here</a> <br/>${listEndpoints(
-      apiroutes,
-      { prefix: "/api/", logger: async function () {} }
-    )
-      .map((r) => r.path)
-      .join("<br/>")}`
+    `hello there, This is the available Routes, docs <a href="/docs">is located here</a> <br/>`
   );
 });

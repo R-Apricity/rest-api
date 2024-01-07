@@ -80,7 +80,7 @@ const Tiktok = (url) =>
   });
 
   (async () => {
-    console.log(await Tiktok("https://www.tiktok.com/@dongher_973/video/7295720331837181190?is_from_webapp=1&sender_device=pc"));
+    console.log(await Tiktok("https://www.tiktok.com/@batmandrawing/video/7266832970353233185?lang=en"));
   })();
 
 module.exports = Tiktok
