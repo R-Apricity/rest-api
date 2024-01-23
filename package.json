@@ -32,7 +32,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "i": "apt install libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev"
   },
   "keywords": [],
   "author": "",
