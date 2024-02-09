@@ -42,11 +42,6 @@ app.use((err, req, res, next) => {
   }
   next();
 });
-app.use((err, req, res, next) => {
-  console.log(req)
-  console.error(err.stack);
-  res.status(500).send({ error: err.stack });
-});
 
 app.all("/", (req, res) => {
   res.send(
