@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import express from "express";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
+import { SwaggerTheme, SwaggerThemeNameEnum } from "swagger-themes";
+import cors from 'cors'
 //Routes
 import { default as apiroutes } from "./lib/routes.js";
 
@@ -20,9 +22,11 @@ const options = {
   },
   apis: ["./lib/routes.js"], // Path to your route files
 };
+const theme = new SwaggerTheme();
+
 
 const app = express();
-
+app.use(cors())
 app
   .listen(process.env.SERVER_PORT || process.env.PORT || 3000, () => {
     console.log(
@@ -34,7 +38,10 @@ app
   .setTimeout(300000);
 app.use(bodyParser.json());
 app.use("/api", apiroutes);
-app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJsdoc(options)));
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJsdoc(options), {
+  // explorer: true,
+  customCss: theme.getBuffer(SwaggerThemeNameEnum.DARK)
+}));
 
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
