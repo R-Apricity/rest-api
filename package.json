@@ -21,7 +21,10 @@
     "mathjs": "^13.0.0",
     "node_characterai": "^1.2.7",
     "npm": "^10.5.2",
+<<<<<<< HEAD
     "puppeteer": "^22.11.0",
+=======
+>>>>>>> 2698b3b86281458bf5eafe38bfce1b1389cc8be4
     "scrape-websitee": "^1.0.76",
     "spotifydl-core": "^0.2.0",
     "swagger-jsdoc": "^6.2.8",

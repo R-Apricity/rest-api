@@ -25,7 +25,7 @@ authkey=0000
 PORT=
 ```
 
-
+I don't have the time to maintain this repo
 <h1>Setting Up</h1>
  <details>
  <details>
